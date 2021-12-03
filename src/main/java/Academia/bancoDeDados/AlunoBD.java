@@ -57,7 +57,6 @@ public class AlunoBD extends Database  {
 
             while(result.next()){
                 Aluno alunoTemp = new Aluno(result.getString("CPF"),result.getString("Nome"),result.getString("Sexo"),result.getString("dataNascimento"),result.getInt("Idade"),result.getFloat("ValorTotal"),result.getString("Telefone"));
-                alunoTemp.setUnidadeEscolhida(result.getInt("unidadeEscolhida"));
                 alunoTemp.setPlanoId(result.getInt("Plano_id"));
                 alunoTemp.setCpf(result.getString("CPF"));
                 System.out.println("CPF = " + alunoTemp.getCpf());
@@ -68,7 +67,6 @@ public class AlunoBD extends Database  {
                 System.out.println("Valor total = " + alunoTemp.getValorTotal());
                 System.out.println("Telefone = " + alunoTemp.getTelefone());
                 System.out.println("Identificador do Plano = " + alunoTemp.getPlanoId());
-                System.out.println("Unidade escolhida = " + alunoTemp.getUnidadeEscolhida());
                 System.out.println("------------------------------");
                 alunos.add(alunoTemp);
             } 
@@ -87,6 +85,28 @@ public class AlunoBD extends Database  {
     }
     // ----------------------------ATUALIZANDO REGISTRO----------------------------
 
+    public boolean updateAluno(String cpf, Float Valor){
+        connect();
+        String sql = "UPDATE Aluno  SET valorTotal=? WHERE CPF=?";
+        try{
+            pst = connection.prepareStatement(sql);
+            pst.setFloat(1,Valor);
+            pst.setString(2, cpf);
+            pst.execute();
+            check = true;
+        }catch (SQLException e){
+            System.out.println("Erro de operação: " + e.getMessage());
+            check = false;
+        }finally {
+            try {
+                connection.close();
+                pst.close();
+            }catch (SQLException e) {
+                System.out.println("Erro ao fechar a conexão: " + e.getMessage());
+            }
+        }
+        return check;
+    }
     public boolean updateFkAluno(String cpf, int Plano_id){
         connect();
         String sql = "UPDATE Aluno SET Plano_id=? WHERE CPF=?";

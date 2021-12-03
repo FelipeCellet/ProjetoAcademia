@@ -80,10 +80,31 @@ public class Main {
                                 alunoBD.researchAluno();
                                 break;
                             case 3:
+                                sc.nextLine();
+                                System.out.println("Entre com o cpf do aluno ");
+                                String auxCpf = sc.nextLine();
+                                System.out.println("Entre com o id do novo Plano");
+                                int idAuxPlano = sc.nextInt();
+                                System.out.println("Entre com a nova Quantidade de Unidades desejada ");
+                                int auxQtd = sc.nextInt();
+                                alunoBD.updateFkAluno(auxCpf,idAuxPlano);
+                                alunoBD.updateAluno(auxCpf ,pl.calculaValorTotal(idAuxPlano,auxQtd));
+                                unidadeHasAlunobd.deleteUnidadeHasAluno(auxCpf);
+                                for(int i = 0 ;i<auxQtd; i++){
+                                    System.out.println("Entre com o id das novas Unidade escolhidas : ");
+                                    int idUniAux = sc.nextInt();
+                                    unidadeHasAlunobd.insertUnidadeHasAluno(idUniAux, auxCpf);
+
+                                }
+
                                 break;
                             case 4:
+                                sc.nextLine();
+                                String cpfAuxiliar ;
                                 System.out.println("Entre com o cpf do aluno a ser Excluido : ");
-                                alunoBD.deleteAluno(sc.nextLine());
+                                cpfAuxiliar = sc.nextLine();
+                                unidadeHasAlunobd.deleteUnidadeHasAluno(cpfAuxiliar);
+                                alunoBD.deleteAluno(cpfAuxiliar);
                                 break;
                             case 5:
                                 System.out.println("Voltando ao menu...");
@@ -101,7 +122,7 @@ public class Main {
                         System.out.println("Escolha uma opção: ");
                         System.out.println("1 - Adicionar um novo Professor");
                         System.out.println("2 - Ver todos Professores ");
-                        System.out.println("3 - Atualizar dados do Professor");
+                        System.out.println("3 - Atualizar Salario do Professor");
                         System.out.println("4 - Excluir Professor ");
                         System.out.println("5 - Voltar ao menu");
                         int opProfessor = sc.nextInt();
@@ -118,7 +139,7 @@ public class Main {
                                 System.out.println("Entre com o sexo : ");
                                 professor.setSexo(sc.nextLine());
                                 System.out.println("Entre com o telefone : ");
-                                professor.setCpf(sc.nextLine());
+                                professor.setTelefone(sc.nextLine());
                                 System.out.println("Entre com a data de nascimento : ");
                                 professor.setDataNascimento(sc.nextLine());
                                 System.out.println("Entre com a idade : ");
@@ -166,7 +187,7 @@ public class Main {
                         System.out.println("2 - Ver todas Unidades ");
                         System.out.println("3 - Atualizar telefone ");
                         System.out.println("4 - Excluir Unidade ");
-                        System.out.println("5 - Adicionar professor reponsavel :  ");
+                        System.out.println("5 - Adicionar professor reponsavel  ");
                         System.out.println("6 - Voltar ao menu");
                         int opUnidade = sc.nextInt();
                         switch (opUnidade){
@@ -248,11 +269,20 @@ public class Main {
                                 break;
 
                             case 3:
-
+                                int auxId = 0;
+                                Float valorNovo;
+                                System.out.println("Entre com o id do plano ");
+                                auxId = sc.nextInt();
+                                System.out.println("Entre com o novo valor ");
+                                valorNovo = sc.nextFloat();
+                                planosBD.updatePlano(auxId,valorNovo);
 
                                 break;
 
                             case 4:
+                                System.out.println("Entre com o ID do plano que sera Excluido ");
+                                int auxIdDel = sc.nextInt();
+                                planosBD.deletePlano(auxIdDel);
 
                                 break;
 

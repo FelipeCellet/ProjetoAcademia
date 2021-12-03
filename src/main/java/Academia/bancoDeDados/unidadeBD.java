@@ -50,6 +50,7 @@ public class unidadeBD extends Database {
                 System.out.println("Cidade : " + unidadeTemp.getCidade());
                 System.out.println("Endereco : " + unidadeTemp.getEndereco());
                 System.out.println("Telefone: " + unidadeTemp.getTelefone());
+                System.out.println("------------------------------");
                 unidade.add(unidadeTemp);
             }
         }catch (SQLException e){

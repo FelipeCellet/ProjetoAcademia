@@ -61,11 +61,57 @@ public class PlanosBD extends Database{
         }
         return planos;
     }
-    public  double  calculaValorTotal(int id,int qntUnidades){
+    public boolean updatePlano(int id, Float novoValor){
+        connect();
+        String sql = "UPDATE Plano SET VaLOR =? WHERE id =?";
+        try{
+            pst = connection.prepareStatement(sql);
+            pst.setFloat(1, novoValor);
+            pst.setInt(2, id);
+            pst.execute();
+            check = true;
+        }catch (SQLException e){
+            System.out.println("Erro de operação: " + e.getMessage());
+            check = false;
+        }finally {
+            try {
+                connection.close();
+                pst.close();
+            }catch (SQLException e) {
+                System.out.println("Erro ao fechar a conexão: " + e.getMessage());
+            }
+        }
+        return check;
+    }
+    // ----------------------------EXCLUINDO REGISTRO----------------------------
+
+
+    public boolean deletePlano   (int id) {
+        connect();
+        String sql = "DELETE FROM Plano WHERE id=?";
+        try{
+            pst = connection.prepareStatement(sql);
+            pst.setInt(1,id);
+            pst.execute();
+            check = true;
+        }catch (SQLException e){
+            System.out.println("Erro de operação: " + e.getMessage());
+            check = false;
+        }finally {
+            try {
+                connection.close();
+                pst.close();
+            }catch (SQLException e){
+                System.out.println("Erro ao fechar a conexão: " + e.getMessage());
+            }
+        }
+        return check;
+    }
+    public float calculaValorTotal(int id, int qntUnidades){
         connect();
         ArrayList<Planos> planos= new ArrayList<>();
         String sql = "SELECT * FROM Plano";
-        double valor = 0;
+       float valor = 0;
         try{
             statement = connection.createStatement();
             result = statement.executeQuery(sql);
@@ -89,9 +135,9 @@ public class PlanosBD extends Database{
         }
 
         if(qntUnidades == 2){
-          valor =  (valor*1.25);
+          valor = (float) (valor*1.25);
         }else if(qntUnidades>=3){
-            valor=(valor*1.40);
+            valor= (float) (valor*1.40);
         }
 
 
