@@ -1,12 +1,6 @@
 package Academia.bancoDeDados;
 
-import Academia.Aluno;
-import Academia.Professor;
-
 import java.sql.*;
-import java.util.ArrayList;
-import java.sql.*;
-import java.util.ArrayList;
 
 public abstract class Database {
     Connection connection;

@@ -1,10 +1,10 @@
-package Academia;
+package Academia.objetos;
 
 public abstract class Pessoa {
     private String nome;
     private int idade;
     private String sexo;
-    public String cpf;
+    private String cpf;
     private String dataNascimento;
     private String telefone;
 
@@ -55,5 +55,13 @@ public abstract class Pessoa {
 
     public void setDataNascimento(String dataNascimento) {
         this.dataNascimento = dataNascimento;
+    }
+
+    public String getCpf() {
+        return cpf;
+    }
+
+    public void setCpf(String cpf) {
+        this.cpf = cpf;
     }
 }

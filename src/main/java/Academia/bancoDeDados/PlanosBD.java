@@ -1,7 +1,6 @@
 package Academia.bancoDeDados;
 
-import Academia.Aluno;
-import Academia.Planos;
+import Academia.objetos.Planos;
 
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -42,7 +41,8 @@ public class PlanosBD extends Database{
 
             while(result.next()){
                 Planos planoTemp = new Planos(result.getString("Especificacao"),result.getFloat("Valor"));
-                System.out.println("ID = " + result.getInt("id"));
+                planoTemp.setId(result.getInt("id"));
+                System.out.println("ID = " + planoTemp.getId());
                 System.out.println("Especificacao = " + planoTemp.getEspecificacao());
                 System.out.println("Valor = " + planoTemp.getValor());
                 System.out.println("------------------------------");
@@ -61,4 +61,39 @@ public class PlanosBD extends Database{
         }
         return planos;
     }
-}
+    public  double  calculaValorTotal(int id,int qntUnidades){
+        connect();
+        ArrayList<Planos> planos= new ArrayList<>();
+        String sql = "SELECT * FROM Plano";
+        double valor = 0;
+        try{
+            statement = connection.createStatement();
+            result = statement.executeQuery(sql);
+            
+            while(result.next()){
+                Planos planoTemp = new Planos(result.getString("Especificacao"),result.getFloat("Valor"));
+                planoTemp.setId(result.getInt("id"));
+                if(planoTemp.getId() == id) valor = planoTemp.getValor();
+                planos.add(planoTemp);
+            }
+        }catch (SQLException e){
+            System.out.println("Erro de operação: " + e.getMessage());
+        }finally {
+            try {
+                connection.close();
+                statement.close();
+                result.close();
+            }catch (SQLException e){
+                System.out.println("Erro ao fechar a conexão: " + e.getMessage());
+            }
+        }
+
+        if(qntUnidades == 2){
+          valor =  (valor*1.25);
+        }else if(qntUnidades>=3){
+            valor=(valor*1.40);
+        }
+
+
+        return valor;
+    }}

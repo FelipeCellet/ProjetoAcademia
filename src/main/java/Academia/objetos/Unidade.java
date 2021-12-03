@@ -1,4 +1,4 @@
-package Academia;
+package Academia.objetos;
 
 public class Unidade {
 
@@ -6,14 +6,13 @@ public class Unidade {
     private String endereco;
     private String telefone;
     private int id;
-    static int unidades = 0;
 
-    public Unidade(String cidade, String endereco, String telefone, int id) {
+
+    public Unidade(String cidade, String endereco, String telefone) {
         this.cidade = cidade;
         this.endereco = endereco;
         this.telefone = telefone;
-        this.id = id;
-        unidades++;
+
     }
 
     public String getCidade() {

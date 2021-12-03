@@ -1,9 +1,12 @@
-package Academia;
+package Academia.objetos;
 
 public class Planos {
 
-        private String especificacao;
+
+    private String especificacao;
         private float valor ;
+
+        private int id;
 
 
 
@@ -21,6 +24,14 @@ public class Planos {
         this.especificacao = especificacao;
     }
 
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
 
     public float getValor() {
         return valor;
