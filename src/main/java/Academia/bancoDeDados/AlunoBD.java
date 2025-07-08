@@ -15,7 +15,7 @@ public class AlunoBD extends Database  {
     // ----------------------------INSERINDO REGISTRO----------------------------
     public boolean insertAluno(Aluno aluno){
         connect();
-        String sql = " INSERT INTO Aluno(CPF,Nome,Sexo, Datanascimento,idade,ValorTotal,Telefone,UnidadeEscolhida) VALUES (?,?,?,?,?,?,?,?)";
+        String sql = " INSERT INTO Aluno(CPF,Nome,Sexo, Datanascimento,idade,ValorTotal,Telefone) VALUES (?,?,?,?,?,?,?)";
         try
         {
             pst = connection.prepareStatement(sql);
@@ -26,7 +26,7 @@ public class AlunoBD extends Database  {
             pst.setInt(5,aluno.getIdade());
             pst.setDouble(6,aluno.getValorTotal());
             pst.setString(7,aluno.getTelefone());
-            pst.setInt(8, aluno.getUnidadeEscolhida());
+
 
 
             pst.execute();

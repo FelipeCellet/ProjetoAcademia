@@ -69,7 +69,7 @@ public class Main {
                                 alunoBD.insertAluno(a);
                                 alunoBD.updateFkAluno(a.getCpf(), a.getPlanoId());
                                 for(int i = 0 ;i<uniAux; i++){
-                                    System.out.println("Entre com o id da Unidade escolhidas : ");
+                                    System.out.println("Entre com o id da Unidade escolhida : ");
                                     a.setUnidadeEscolhida(sc.nextInt());
                                     unidadeHasAlunobd.insertUnidadeHasAluno(a.getUnidadeEscolhida(), a.getCpf());
 
